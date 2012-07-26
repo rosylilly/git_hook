@@ -27,7 +27,7 @@ module GitHook
 
     private
     def say(msg, color)
-      @tty.respond_to?(:say) && @tty.say(msg, color) : @tty.puts(msg)
+      @tty.respond_to?(:say) ? @tty.say(msg, color) : @tty.puts(msg)
     end
   end
 end
