@@ -1,3 +1,4 @@
+require 'rbconfig'
 require 'pathname'
 require 'git_hook/version'
 require 'git_hook/io'
@@ -5,6 +6,8 @@ require 'git_hook/io'
 module GitHook
   WINDOWS = RbConfig::CONFIG["host_os"] =~ %r!(msdos|mswin|djgpp|mingw)!
   NULL = WINDOWS ? 'NUL' : '/dev/null'
+
+  TIMINGS = [:'applypatch-msg', :'pre-applypatch', :'post-applypatch', :'pre-commit', :'prepare-commit-msg', :'commit-msg', :'post-commit', :'pre-rebase', :'post-checkout', :'post-merge', :'pre-receive', :'update', :'post-receive', :'post-update', :'pre-auto-gc', :'post-rewrite']
 
   class << self
     def with_pretty_exception(&block)
