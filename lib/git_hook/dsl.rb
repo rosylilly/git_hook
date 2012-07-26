@@ -1,4 +1,4 @@
-require 'git-hook'
+require 'git_hook'
 
 module GitHook
   class DSL

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'git-hook'
+require 'git_hook'
 
 describe GitHook do
   its(:git_dir) {

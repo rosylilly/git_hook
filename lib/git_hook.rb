@@ -1,6 +1,6 @@
 require 'pathname'
-require 'git-hook/version'
-require 'git-hook/io'
+require 'git_hook/version'
+require 'git_hook/io'
 
 module GitHook
   WINDOWS = RbConfig::CONFIG["host_os"] =~ %r!(msdos|mswin|djgpp|mingw)!
