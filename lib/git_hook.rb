@@ -26,6 +26,10 @@ module GitHook
       @io ||= GitHook::IO.new
     end
 
+    def repo_dir
+      @repo_dir ||= Pathname.new(Dir.pwd).join(`git rev-parse --show-cdup 2> #{NULL}`.strip).expand_path
+    end
+
     def git_dir
       @git_dir ||= begin
                    dir = `git rev-parse --git-dir 2> #{NULL}`.strip
@@ -39,3 +43,6 @@ module GitHook
     end
   end
 end
+
+require 'git_hook/hook'
+require 'git_hook/dsl'
