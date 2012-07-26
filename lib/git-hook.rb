@@ -30,5 +30,9 @@ module GitHook
                    Pathname.new(dir).expand_path
                  end
     end
+
+    def hooks_dir
+      git_dir.join('hooks')
+    end
   end
 end
