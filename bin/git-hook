@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'git-hook'
+require 'git-hook/cli'
+
+GitHook.with_pretty_exception {
+  GitHook::CLI.start
+}
