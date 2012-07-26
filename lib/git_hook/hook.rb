@@ -28,10 +28,10 @@ module GitHook
       name = name.to_s
       if name =~ /^[a-z]/
         { class: class_name(name),
-          gem: name }
+          require: name }
       else
         { class: name,
-          gem: gem_name(name) }
+          require: gem_name(name) }
       end
     end
 

@@ -23,9 +23,9 @@ module GitHook
       @hooks[timing] = [] if @hooks[timing].nil?
 
       obj = GitHook::Hook.resolve(name)
-      obj[:gem] = options[:gem] if options[:gem]
+      obj[:require] = options[:require] if options[:require]
       Kernel.instance_eval do
-        require obj[:gem]
+        require obj[:require]
       end
       obj[:class] = Kernel.const_get(obj[:class])
       obj[:options] = options
