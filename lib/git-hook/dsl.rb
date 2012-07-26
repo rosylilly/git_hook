@@ -5,12 +5,13 @@ module GitHook
     def self.eval(hooks_file)
       env = new
       env.load(hooks_file)
-      env.to_hooks
+      env.hooks
     end
 
     def initialize
       @hooks = {}
     end
+    attr_reader :hooks
 
     # @param [String, Symbol, Class] name
     # @param [Symbol] timing GitHook::Timings
