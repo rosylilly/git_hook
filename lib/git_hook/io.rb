@@ -5,7 +5,12 @@ module GitHook
     attr_accessor :tty
 
     def initialize
-      @tty = nil
+      @tty = STDOUT
+      @verbose = false
+    end
+
+    def verbose!(bool)
+      @verbose = !!bool
     end
 
     def info(msg)
@@ -13,7 +18,7 @@ module GitHook
     end
 
     def warn(msg)
-      say(msg, :yellow)
+      @verbose && say(msg, :yellow)
     end
 
     def error(msg)
@@ -22,7 +27,7 @@ module GitHook
 
     private
     def say(msg, color)
-      !@tty.nil? && @tty.say(msg, color)
+      @tty.respond_to?(:say) && @tty.say(msg, color) : @tty.puts(msg)
     end
   end
 end
