@@ -16,4 +16,6 @@ Gem::Specification.new do |gem|
   gem.version       = GitHook::VERSION
 
   gem.add_dependency "thor", "0.15.4"
+  gem.add_dependency "hashr", "0.0.21"
+  gem.add_dependency "git", "1.2.5"
 end

@@ -19,11 +19,18 @@ module GitHook
     # @option options [String] gem require path
     def hook(name, timing, options = {})
       timing = timing.to_s.to_sym
+      options = options || {}
       @hooks[timing] = [] if @hooks[timing].nil?
-      @hooks[timing].push({
-        name: name,
-        options: options || {}
-      })
+
+      obj = GitHook::Hook.resolve(name)
+      obj[:gem] = options[:gem] if options[:gem]
+      Kernel.instance_eval do
+        require obj[:gem]
+      end
+      obj[:class] = Kernel.const_get(obj[:class])
+      obj[:options] = options
+
+      @hooks[timing].push(obj)
     end
 
     GitHook::TIMINGS.each do | timing |
