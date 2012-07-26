@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "git-hook"
   gem.require_paths = ["lib"]
   gem.version       = GitHook::VERSION
+
+  gem.add_dependency "thor", "0.15.4"
 end
