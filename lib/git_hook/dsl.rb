@@ -26,6 +26,12 @@ module GitHook
       })
     end
 
+    GitHook::TIMINGS.each do | timing |
+      define_method(timing.to_s.gsub('-', '_')) do | name, *options |
+        hook(name, timing, options.first)
+      end
+    end
+
     # @param [String] path
     def load(path)
       instance_eval(open(path){|f| f.read })
