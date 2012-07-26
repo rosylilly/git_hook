@@ -10,8 +10,13 @@ module GitHook
 
     def initialize
       @hooks = {}
+      @with_bundler = false
     end
-    attr_reader :hooks
+    attr_reader :hooks, :with_bundler
+
+    def with_bundler!
+      @with_bundler = true
+    end
 
     # @param [String, Symbol, Class] name
     # @param [Symbol] timing GitHook::Timings

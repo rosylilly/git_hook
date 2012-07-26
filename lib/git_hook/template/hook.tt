@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+dir = File.dirname(__FILE__)
+if dir =~ /\.git\/hooks$/
+  dir = File.expand_path(File.join(dir, '..', '..'))
+else
+  dir = File.expand_path(File.join(dir, '..'))
+end
+
+Dir.chdir(dir) do | dir |
+  <%- if config[:with_bundler] -%>
+  require 'bundler/setup'
+  <%- end -%>
+  require 'git_hook/runner'
+  GitHook::Runner.run("<%= config[:timing] %>")
+end
