@@ -3,7 +3,7 @@ require 'git_hook'
 
 module GitHook
   class Runner
-    def run(timing)
+    def self.run(timing)
       context = GitHook::DSL.eval('.githooks')
       repository = Git.open('.')
       result = context.hooks[timing.to_sym].inject(true) do | result, hook |

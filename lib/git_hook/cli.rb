@@ -34,7 +34,16 @@ module GitHook
         template('githooks.tt', '.githooks', opts)
       end
 
-      GitHook::TIMINGS.each do | timing |
+      invoke(:apply)
+    end
+
+    desc "apply", "apply git hook execute file in .git/hooks/*"
+    def apply
+      Dir.chdir(GitHook.repo_dir)
+      opts = {
+        with_bundler: File.exist?('Gemfile')
+      }
+      config.hooks.keys.each do | timing |
         opts[:timing] = timing
         template('hook.tt', ".git/hooks/#{timing}", opts)
         chmod(".git/hooks/#{timing}", 0755)
@@ -43,6 +52,11 @@ module GitHook
 
     desc "list [STRING]", "display hooks those name starts with STRING"
     def list(filter = nil)
+    end
+
+    private
+    def config
+      @config ||= GitHook::DSL.eval('.githooks')
     end
   end
 end

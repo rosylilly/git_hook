@@ -5,7 +5,7 @@ module GitHook
     def self.eval(hooks_file)
       env = new
       env.load(hooks_file)
-      env.hooks
+      env
     end
 
     def initialize
@@ -32,7 +32,9 @@ module GitHook
       Kernel.instance_eval do
         require obj[:require]
       end
-      obj[:class] = Kernel.const_get(obj[:class])
+      obj[:class] = obj[:class].to_s.split('::').inject(Kernel){|namespace, klass|
+        namespace.const_get(klass)
+      }
       obj[:options] = options
 
       @hooks[timing].push(obj)
