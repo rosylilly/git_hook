@@ -50,8 +50,8 @@ module GitHook
       end
     end
 
-    desc "list [STRING]", "display hooks those name starts with STRING"
-    def list(filter = nil)
+    desc "list", "display hooks those name starts with STRING"
+    def list
       config.hooks.each_pair do | timing, hooks |
         say(timing, :blue)
         hooks.each do | hook |
