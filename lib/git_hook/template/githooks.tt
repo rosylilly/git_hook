@@ -2,4 +2,5 @@
 with_bundler!
 <%- end -%>
 
-
+# example
+# pre_commit 'GitHook::Hook'

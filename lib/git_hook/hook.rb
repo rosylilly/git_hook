@@ -54,6 +54,7 @@ module GitHook
     end
 
     def invoke
+      error("This Hook is abstruct class. please override your Hook")
       true
     end
 
