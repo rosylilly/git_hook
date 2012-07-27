@@ -30,7 +30,10 @@ module GitHook
       obj = GitHook::Hook.resolve(name)
       obj[:require] = options[:require] if options[:require]
       Kernel.instance_eval do
-        require obj[:require]
+        begin
+          require obj[:require]
+        rescue LoadError
+        end
       end
       obj[:class] = obj[:class].to_s.split('::').inject(Kernel){|namespace, klass|
         namespace.const_get(klass)
