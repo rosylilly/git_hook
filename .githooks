@@ -1,3 +1,3 @@
 with_bundler!
 
-pre_commit 'GitHook::Hook', require: 'git_hook/hook', key: :val, test: false
+pre_commit 'GitHook::Hooks::RubySyntaxCheck', require: 'git_hook/hooks/ruby_syntax_check'

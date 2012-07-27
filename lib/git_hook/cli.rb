@@ -1,5 +1,6 @@
-require 'git_hook'
 require 'thor'
+require 'git_hook'
+require 'git_hook/runner'
 
 module GitHook
   class CLI < Thor
@@ -12,6 +13,7 @@ module GitHook
       super(*args)
       GitHook.io.tty = (options['no-color'] ? Thor::Shell::BasicShell.new : shell)
       GitHook.io.verbose!(true) if options['verbose']
+      Dir.chdir(GitHook.repo_dir)
     end
 
     desc "version", "display git-hook's version"
@@ -26,7 +28,6 @@ module GitHook
 
     desc "install", "install git hooks"
     def install
-      Dir.chdir(GitHook.repo_dir)
       opts = {
         with_bundler: File.exist?('Gemfile')
       }
@@ -39,7 +40,6 @@ module GitHook
 
     desc "apply", "apply git hook execute file in .git/hooks/*"
     def apply
-      Dir.chdir(GitHook.repo_dir)
       opts = {
         with_bundler: File.exist?('Gemfile')
       }
@@ -62,6 +62,13 @@ module GitHook
           end
         end
       end
+    end
+
+    desc "test TIMING HOOK", "test HOOK on TIMING"
+    def test(timing, hook)
+      timing = timing.to_s.to_sym
+      result = GitHook::Runner.invoke(timing, hook)
+      say_status("success", "#{result}", :yellow)
     end
 
     private

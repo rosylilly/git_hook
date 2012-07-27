@@ -44,5 +44,6 @@ module GitHook
   end
 end
 
-require 'git_hook/hook'
 require 'git_hook/dsl'
+require 'git_hook/hook'
+require 'git_hook/hooks'
