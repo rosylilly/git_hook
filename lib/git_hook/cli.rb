@@ -52,6 +52,16 @@ module GitHook
 
     desc "list [STRING]", "display hooks those name starts with STRING"
     def list(filter = nil)
+      config.hooks.each_pair do | timing, hooks |
+        say(timing, :blue)
+        hooks.each do | hook |
+          say("  #{hook[:class]}", :green, true)
+          hook[:options].each_pair do | key, value |
+            say(" " * 4 + key.to_s, :yellow, false)
+            say(" : #{value}", nil, true)
+          end
+        end
+      end
     end
 
     private
