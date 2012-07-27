@@ -53,6 +53,10 @@ module GitHook
       @options
     end
 
+    def invoke
+      true
+    end
+
     def info(msg); GitHook.io.info(msg); end
     def warn(msg); GitHook.io.warn(msg); end
     def error(msg); GitHook.io.error(msg); end
