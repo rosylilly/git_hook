@@ -10,7 +10,7 @@ in global:
 
 in project local:
 
-    gem 'git-hook'
+    $ echo "gem 'git-hook'" >> Gemfile
 
     $ bundle install
 
