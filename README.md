@@ -1,29 +1,30 @@
-# GitHook
+# git-hook
 
-TODO: Write a gem description
+git hooks management command line tool.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'git-hook'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+in global:
 
     $ gem install git-hook
 
+in project local:
+
+    gem 'git-hook'
+
+    $ bundle install
+
+use
+
+    $ git hook --version
+
 ## Usage
 
-TODO: Write usage instructions here
+write .githooks file:
 
-## Contributing
+    pre_commit 'GitHook::Hooks::RubySyntaxCheck', :require => 'git_hook/hooks/ruby_syntax_check'
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+and run it:
+
+    $ git hook apply
+
