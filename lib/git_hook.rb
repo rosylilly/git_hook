@@ -5,7 +5,11 @@ require 'git_hook/io'
 
 module GitHook
   WINDOWS = RbConfig::CONFIG["host_os"] =~ %r!(msdos|mswin|djgpp|mingw)!
-  NULL = WINDOWS ? 'NUL' : '/dev/null'
+  NULL = if File.const_defined?(:NULL)
+           File::NULL
+         else
+           WINDOWS ? 'NUL' : '/dev/null'
+         end
 
   TIMINGS = [:'applypatch-msg', :'pre-applypatch', :'post-applypatch', :'pre-commit', :'prepare-commit-msg', :'commit-msg', :'post-commit', :'pre-rebase', :'post-checkout', :'post-merge', :'pre-receive', :'update', :'post-receive', :'post-update', :'pre-auto-gc', :'post-rewrite']
 
